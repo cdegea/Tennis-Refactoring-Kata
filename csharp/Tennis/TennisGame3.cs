@@ -6,11 +6,13 @@ namespace Tennis
         private int player1Points;
         private readonly string player1Name;
         private readonly string player2Name;
+        private readonly string[] pointNames;
 
         public TennisGame3(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
             this.player2Name = player2Name;
+            pointNames = new[] { "Love", "Fifteen", "Thirty", "Forty" };
         }
 
         public string GetScoreResult()
@@ -18,9 +20,8 @@ namespace Tennis
             string s;
             if ((player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6))
             {
-                string[] p = { "Love", "Fifteen", "Thirty", "Forty" };
-                s = p[player1Points];
-                return (player1Points == player2Points) ? s + "-All" : s + "-" + p[player2Points];
+                s = pointNames[player1Points];
+                return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
             }
 
             if (player1Points == player2Points)
