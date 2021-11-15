@@ -2,8 +2,8 @@ namespace Tennis
 {
     public class TennisGame3 : ITennisGame
     {
-        private int p2;
-        private int p1;
+        private int player2Points;
+        private int player1Points;
         private readonly string player1Name;
         private readonly string player2Name;
 
@@ -16,25 +16,25 @@ namespace Tennis
         public string GetScoreResult()
         {
             string s;
-            if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
+            if ((player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6))
             {
                 string[] p = { "Love", "Fifteen", "Thirty", "Forty" };
-                s = p[p1];
-                return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+                s = p[player1Points];
+                return (player1Points == player2Points) ? s + "-All" : s + "-" + p[player2Points];
             }
 
-            if (p1 == p2)
+            if (player1Points == player2Points)
                 return "Deuce";
-            s = p1 > p2 ? player1Name : player2Name;
-            return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
+            s = player1Points > player2Points ? player1Name : player2Name;
+            return ((player1Points - player2Points) * (player1Points - player2Points) == 1) ? "Advantage " + s : "Win for " + s;
         }
 
         public void WonPoint(string playerName)
         {
             if (playerName == "player1")
-                p1 += 1;
+                player1Points += 1;
             else
-                p2 += 1;
+                player2Points += 1;
         }
 
     }
