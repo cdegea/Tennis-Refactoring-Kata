@@ -22,14 +22,20 @@ namespace Tennis
             string s;
             if (IsTheSame())
             {
-                s = GetPointName(player1Points);
-                return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
+                return GetScoreForTheSame();
             }
 
             if (player1Points == player2Points)
                 return "Deuce";
             s = player1Points > player2Points ? player1Name : player2Name;
             return IsAdvantage() ? "Advantage " + s : "Win for " + s;
+        }
+
+        private string GetScoreForTheSame()
+        {
+            string s;
+            s = GetPointName(player1Points);
+            return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
         }
 
         private bool IsTheSame()
