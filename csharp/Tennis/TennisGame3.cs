@@ -20,7 +20,7 @@ namespace Tennis
         public string GetScoreResult()
         {
             string s;
-            if ((player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6))
+            if (IsTheSame())
             {
                 s = GetPointName(player1Points);
                 return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
@@ -30,6 +30,11 @@ namespace Tennis
                 return "Deuce";
             s = player1Points > player2Points ? player1Name : player2Name;
             return IsAdvantage() ? "Advantage " + s : "Win for " + s;
+        }
+
+        private bool IsTheSame()
+        {
+            return (player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6);
         }
 
         private bool IsAdvantage()
