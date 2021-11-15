@@ -4,8 +4,8 @@ namespace Tennis
     {
         private int p2;
         private int p1;
-        private string player1Name;
-        private string player2Name;
+        private readonly string player1Name;
+        private readonly string player2Name;
 
         public TennisGame3(string player1Name, string player2Name)
         {
@@ -22,21 +22,19 @@ namespace Tennis
                 s = p[p1];
                 return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
             }
-            else
-            {
-                if (p1 == p2)
-                    return "Deuce";
-                s = p1 > p2 ? player1Name : player2Name;
-                return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
-            }
+
+            if (p1 == p2)
+                return "Deuce";
+            s = p1 > p2 ? player1Name : player2Name;
+            return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
         }
 
         public void WonPoint(string playerName)
         {
             if (playerName == "player1")
-                this.p1 += 1;
+                p1 += 1;
             else
-                this.p2 += 1;
+                p2 += 1;
         }
 
     }
