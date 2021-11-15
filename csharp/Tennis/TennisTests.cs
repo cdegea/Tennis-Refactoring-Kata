@@ -55,7 +55,7 @@ namespace Tennis
         [ClassData(typeof(TestDataGenerator))]
         public void Tennis1Test(int p1, int p2, string expected)
         {
-            var game = new TennisGame1("player1", "player2");
+            var game = new TennisGame1("player1");
             CheckAllScores(game, p1, p2, expected);
         }
 
@@ -86,7 +86,7 @@ namespace Tennis
                     game.WonPoint("player2");
             }
 
-            Assert.Equal(expectedScore, game.GetScore());
+            Assert.Equal(expectedScore, game.GetScoreResult());
         }
     }
 }

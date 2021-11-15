@@ -1,81 +1,119 @@
 namespace Tennis
 {
-    class TennisGame1 : ITennisGame
+    internal class Player
     {
-        private int m_score1 = 0;
-        private int m_score2 = 0;
-        private string player1Name;
-        private string player2Name;
+        public string PlayerName { get; }
 
-        public TennisGame1(string player1Name, string player2Name)
+        public Player(string playerName)
         {
-            this.player1Name = player1Name;
-            this.player2Name = player2Name;
+            PlayerName = playerName;
+        }
+    }
+    internal class Score
+    {
+        public int ScoreLeft { get; private set; }
+        public int ScoreRight { get; private set; }
+
+        public Score()
+        {
+            ScoreLeft = 0;
+            ScoreRight = 0;
         }
 
-        public void WonPoint(string playerName)
+        public void AddScore(bool isLeft)
         {
-            if (playerName == "player1")
-                m_score1 += 1;
+            if (isLeft)
+                ScoreLeft++;
             else
-                m_score2 += 1;
+                ScoreRight++;
+        }
+
+        public bool IsTheSame() => ScoreLeft == ScoreRight;
+
+        public bool IsInAdvantage()
+        {
+            return this.ScoreLeft >= 4 || this.ScoreRight >= 4;
+        }
+
+        private static string GetNameByScoreValue(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                default:
+                    return "Forty";
+            }
+        }
+
+        public string GetNaturalScore()
+        {
+            return $"{GetNameByScoreValue(ScoreLeft)}-{GetNameByScoreValue(ScoreRight)}";
+        }
+
+        public string GetScoreForAdvantage()
+        {
+            var minusResult = ScoreLeft - ScoreRight;
+            switch (minusResult)
+            {
+                case 1:
+                    return "Advantage player1";
+                case -1:
+                    return "Advantage player2";
+                case >= 2:
+                    return "Win for player1";
+                default:
+                    return "Win for player2";
+            }
+        }
+
+        public string GetScoreForSame()
+        {
+            switch (ScoreLeft)
+            {
+                case 0:
+                    return "Love-All";                    
+                case 1:
+                    return "Fifteen-All";                    
+                case 2:
+                    return "Thirty-All";                    
+                default:
+                    return "Deuce";                    
+            }
         }
 
         public string GetScore()
         {
-            string score = "";
-            var tempScore = 0;
-            if (m_score1 == m_score2)
-            {
-                switch (m_score1)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
+            if (IsTheSame())
+                return GetScoreForSame();
+            if (IsInAdvantage())
+                return GetScoreForAdvantage();
+            return GetNaturalScore();
+        }
+    }
+    internal class TennisGame1 : ITennisGame
+    {
+        private readonly Player winnerOfPoint;
+        private readonly Score score;
 
-                }
-            }
-            else if (m_score1 >= 4 || m_score2 >= 4)
-            {
-                var minusResult = m_score1 - m_score2;
-                if (minusResult == 1) score = "Advantage player1";
-                else if (minusResult == -1) score = "Advantage player2";
-                else if (minusResult >= 2) score = "Win for player1";
-                else score = "Win for player2";
-            }
-            else
-            {
-                for (var i = 1; i < 3; i++)
-                {
-                    if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
-                    switch (tempScore)
-                    {
-                        case 0:
-                            score += "Love";
-                            break;
-                        case 1:
-                            score += "Fifteen";
-                            break;
-                        case 2:
-                            score += "Thirty";
-                            break;
-                        case 3:
-                            score += "Forty";
-                            break;
-                    }
-                }
-            }
-            return score;
+        public TennisGame1(string winnerName)
+        {
+            winnerOfPoint = new Player(winnerName);
+            score = new Score();
+        }
+
+        public void WonPoint(string playerName)
+        {
+            score.AddScore(playerName == winnerOfPoint.PlayerName);
+        }
+
+        public string GetScoreResult()
+        {
+            return score.GetScore();
         }
     }
 }
