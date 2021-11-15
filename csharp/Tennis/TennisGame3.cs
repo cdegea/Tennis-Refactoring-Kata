@@ -20,7 +20,7 @@ namespace Tennis
             string s;
             if ((player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6))
             {
-                s = pointNames[player1Points];
+                s = GetPointName(player1Points);
                 return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
             }
 
@@ -28,6 +28,11 @@ namespace Tennis
                 return "Deuce";
             s = player1Points > player2Points ? player1Name : player2Name;
             return ((player1Points - player2Points) * (player1Points - player2Points) == 1) ? "Advantage " + s : "Win for " + s;
+        }
+
+        private string GetPointName(int point)
+        {
+            return pointNames[point];
         }
 
         public void WonPoint(string playerName)
