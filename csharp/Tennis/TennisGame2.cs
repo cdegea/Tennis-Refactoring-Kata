@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame2 : ITennisGame
@@ -29,15 +31,17 @@ namespace Tennis
                 score = $"Advantage {GetPlayerNameInAdvantage()}";
             }
 
-            if (player1Points >= 4 && player2Points >= 0 && (player1Points - player2Points) >= 2)
+            if (WeHaveWinner())
             {
-                score = "Win for player1";
+                score = $"Win for {GetPlayerNameInAdvantage()}";
             }
-            if (player2Points >= 4 && player1Points >= 0 && (player2Points - player1Points) >= 2)
-            {
-                score = "Win for player2";
-            }
+            
             return score;
+        }
+
+        private bool WeHaveWinner()
+        {
+            return (player2Points >= 4 && player1Points >= 0 || player1Points >= 4 && player2Points >= 0) && Math.Abs(player1Points - player2Points) >= 2;
         }
 
         private bool IsInAdvantage()
