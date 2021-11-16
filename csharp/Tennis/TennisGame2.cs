@@ -56,25 +56,6 @@ namespace Tennis
             }
         }
 
-        private string GetScoreForSame(string score)
-        {
-            switch (player1Points)
-            {
-                case 0:
-                    score = "Love";
-                    break;
-                case 1:
-                    score = "Fifteen";
-                    break;
-                case 2:
-                    score = "Thirty";
-                    break;
-            }
-
-            score += "-All";
-            return score;
-        }
-
         public void WonPoint(string player)
         {
             if (player == "player1")
