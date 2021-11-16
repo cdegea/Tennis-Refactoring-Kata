@@ -19,7 +19,7 @@ namespace Tennis
         public string GetScoreResult()
         {
             var score = GetScoreWord(player1Points) + "-" + GetScoreWord(player2Points);
-            if (player1Points == player2Points && player1Points < 3)
+            if (AreEquals())
             {
                 score = GetScoreWord(player1Points) + "-All";
             }
@@ -37,6 +37,11 @@ namespace Tennis
             }
             
             return score;
+        }
+
+        private bool AreEquals()
+        {
+            return player1Points == player2Points && player1Points < 3;
         }
 
         private bool WeHaveWinner()
