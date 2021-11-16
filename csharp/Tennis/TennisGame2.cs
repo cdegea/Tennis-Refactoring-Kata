@@ -18,59 +18,14 @@ namespace Tennis
             var score = "";
             if (p1point == p2point && p1point < 3)
             {
-                switch (p1point)
-                {
-                    case 0:
-                        score = "Love";
-                        break;
-                    case 1:
-                        score = "Fifteen";
-                        break;
-                    case 2:
-                        score = "Thirty";
-                        break;
-                }
-
-                score += "-All";
+                score = GetScoreForSame(score);
             }
             if (p1point == p2point && p1point > 2)
                 score = "Deuce";
 
-            if (p1point > 0 && p2point == 0)
+            if (p1point > 0 && p2point == 0 || p2point > 0 && p1point == 0)
             {
-                switch (p1point)
-                {
-                    case 1:
-                        p1res = "Fifteen";
-                        break;
-                    case 2:
-                        p1res = "Thirty";
-                        break;
-                    case 3:
-                        p1res = "Forty";
-                        break;
-                }
-
-                p2res = "Love";
-                score = p1res + "-" + p2res;
-            }
-            if (p2point > 0 && p1point == 0)
-            {
-                switch (p2point)
-                {
-                    case 1:
-                        p2res = "Fifteen";
-                        break;
-                    case 2:
-                        p2res = "Thirty";
-                        break;
-                    case 3:
-                        p2res = "Forty";
-                        break;
-                }
-
-                p1res = "Love";
-                score = p1res + "-" + p2res;
+                return GetScoreWord(p1point) + "-" + GetScoreWord(p2point);
             }
 
             if (p1point > p2point && p1point < 4)
@@ -140,6 +95,40 @@ namespace Tennis
             {
                 score = "Win for player2";
             }
+            return score;
+        }
+
+        private string GetScoreWord(int points)
+        {
+            switch (points)
+            {
+                case 0:
+                    return "Love";
+                case 1:   
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                default:
+                   return "Forty";
+            }
+        }
+
+        private string GetScoreForSame(string score)
+        {
+            switch (p1point)
+            {
+                case 0:
+                    score = "Love";
+                    break;
+                case 1:
+                    score = "Fifteen";
+                    break;
+                case 2:
+                    score = "Thirty";
+                    break;
+            }
+
+            score += "-All";
             return score;
         }
 
