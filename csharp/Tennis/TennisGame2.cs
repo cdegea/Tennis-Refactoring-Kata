@@ -18,12 +18,19 @@ namespace Tennis
             var score = "";
             if (p1point == p2point && p1point < 3)
             {
-                if (p1point == 0)
-                    score = "Love";
-                if (p1point == 1)
-                    score = "Fifteen";
-                if (p1point == 2)
-                    score = "Thirty";
+                switch (p1point)
+                {
+                    case 0:
+                        score = "Love";
+                        break;
+                    case 1:
+                        score = "Fifteen";
+                        break;
+                    case 2:
+                        score = "Thirty";
+                        break;
+                }
+
                 score += "-All";
             }
             if (p1point == p2point && p1point > 2)
@@ -31,24 +38,36 @@ namespace Tennis
 
             if (p1point > 0 && p2point == 0)
             {
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
-                if (p1point == 3)
-                    p1res = "Forty";
+                switch (p1point)
+                {
+                    case 1:
+                        p1res = "Fifteen";
+                        break;
+                    case 2:
+                        p1res = "Thirty";
+                        break;
+                    case 3:
+                        p1res = "Forty";
+                        break;
+                }
 
                 p2res = "Love";
                 score = p1res + "-" + p2res;
             }
             if (p2point > 0 && p1point == 0)
             {
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
-                if (p2point == 3)
-                    p2res = "Forty";
+                switch (p2point)
+                {
+                    case 1:
+                        p2res = "Fifteen";
+                        break;
+                    case 2:
+                        p2res = "Thirty";
+                        break;
+                    case 3:
+                        p2res = "Forty";
+                        break;
+                }
 
                 p1res = "Love";
                 score = p1res + "-" + p2res;
@@ -56,26 +75,50 @@ namespace Tennis
 
             if (p1point > p2point && p1point < 4)
             {
-                if (p1point == 2)
-                    p1res = "Thirty";
-                if (p1point == 3)
-                    p1res = "Forty";
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
+                switch (p1point)
+                {
+                    case 2:
+                        p1res = "Thirty";
+                        break;
+                    case 3:
+                        p1res = "Forty";
+                        break;
+                }
+
+                switch (p2point)
+                {
+                    case 1:
+                        p2res = "Fifteen";
+                        break;
+                    case 2:
+                        p2res = "Thirty";
+                        break;
+                }
+
                 score = p1res + "-" + p2res;
             }
             if (p2point > p1point && p2point < 4)
             {
-                if (p2point == 2)
-                    p2res = "Thirty";
-                if (p2point == 3)
-                    p2res = "Forty";
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
+                switch (p2point)
+                {
+                    case 2:
+                        p2res = "Thirty";
+                        break;
+                    case 3:
+                        p2res = "Forty";
+                        break;
+                }
+
+                switch (p1point)
+                {
+                    case 1:
+                        p1res = "Fifteen";
+                        break;
+                    case 2:
+                        p1res = "Thirty";
+                        break;
+                }
+
                 score = p1res + "-" + p2res;
             }
 
@@ -107,7 +150,6 @@ namespace Tennis
             else
                 p2point++;
         }
-
     }
 }
 
