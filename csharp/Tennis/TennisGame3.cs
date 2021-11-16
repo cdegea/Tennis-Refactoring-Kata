@@ -19,22 +19,23 @@ namespace Tennis
 
         public string GetScoreResult()
         {
-            string s;
             if (IsTheSame())
-            {
                 return GetScoreForTheSame();
-            }
-
+            
             if (player1Points == player2Points)
                 return "Deuce";
-            s = player1Points > player2Points ? player1Name : player2Name;
-            return IsAdvantage() ? "Advantage " + s : "Win for " + s;
+
+            return IsAdvantage() ? "Advantage " + GetAdvantagedPlayerName() : "Win for " + GetAdvantagedPlayerName();
+        }
+
+        private string GetAdvantagedPlayerName()
+        {
+            return player1Points > player2Points ? player1Name : player2Name;
         }
 
         private string GetScoreForTheSame()
         {
-            string s;
-            s = GetPointName(player1Points);
+            var s = GetPointName(player1Points);
             return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
         }
 
