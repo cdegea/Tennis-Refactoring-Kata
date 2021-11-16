@@ -15,18 +15,13 @@ namespace Tennis
 
         public string GetScoreResult()
         {
-            var score = "";
+            var score = GetScoreWord(p1point) + "-" + GetScoreWord(p2point);
             if (p1point == p2point && p1point < 3)
             {
                 score = GetScoreForSame(score);
             }
             if (p1point == p2point && p1point > 2)
                 score = "Deuce";
-
-            if (p1point > 0 && p2point == 0 || p2point > 0 && p1point == 0)
-            {
-                return GetScoreWord(p1point) + "-" + GetScoreWord(p2point);
-            }
 
             if (p1point > p2point && p1point < 4)
             {
