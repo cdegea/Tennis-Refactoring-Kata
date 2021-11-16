@@ -4,10 +4,14 @@ namespace Tennis
     {
         private int player1Points;
         private int player2Points;
+        private string player1Name;
+        private string player2Name;
 
         public TennisGame2()
         {
             player1Points = 0;
+            player1Name = "player1";
+            player2Name = "player2";
         }
 
         public string GetScoreResult()
@@ -20,14 +24,9 @@ namespace Tennis
             if (player1Points == player2Points && player1Points > 2)
                 score = "Deuce";
 
-            if (player1Points > player2Points && player2Points >= 3)
+            if (IsInAdvantage())
             {
-                score = "Advantage player1";
-            }
-
-            if (player2Points > player1Points && player1Points >= 3)
-            {
-                score = "Advantage player2";
+                score = $"Advantage {GetPlayerNameInAdvantage()}";
             }
 
             if (player1Points >= 4 && player2Points >= 0 && (player1Points - player2Points) >= 2)
@@ -39,6 +38,12 @@ namespace Tennis
                 score = "Win for player2";
             }
             return score;
+        }
+
+        private bool IsInAdvantage()
+        {
+            return player1Points > player2Points && player2Points >= 3 ||
+                   player2Points > player1Points && player1Points >= 3;
         }
 
         private string GetScoreWord(int points)
@@ -62,6 +67,11 @@ namespace Tennis
                 player1Points++;
             else
                 player2Points++;
+        }
+
+        public string GetPlayerNameInAdvantage()
+        {
+            return player1Points > player2Points ? "player1" : "player2";
         }
     }
 }
