@@ -23,7 +23,7 @@ namespace Tennis
             {
                 score = GetScoreWord(player1Points) + "-All";
             }
-            if (player1Points == player2Points && player1Points > 2)
+            if (AreDeuce())
                 score = "Deuce";
 
             if (IsInAdvantage())
@@ -37,6 +37,11 @@ namespace Tennis
             }
             
             return score;
+        }
+
+        private bool AreDeuce()
+        {
+            return player1Points == player2Points && player1Points > 2;
         }
 
         private bool AreEquals()
