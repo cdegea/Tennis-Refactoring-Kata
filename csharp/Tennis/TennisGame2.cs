@@ -74,7 +74,7 @@ namespace Tennis
 
         public string GetPlayerNameInAdvantage()
         {
-            return player1Points > player2Points ? "player1" : "player2";
+            return player1Points > player2Points ? player1Name : player2Name;
         }
     }
 }
