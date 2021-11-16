@@ -19,23 +19,12 @@ namespace Tennis
         public string GetScoreResult()
         {
             var score = GetScoreWord(player1Points) + "-" + GetScoreWord(player2Points);
-            if (AreEquals())
-            {
-                score = GetScoreWord(player1Points) + "-All";
-            }
-            if (AreDeuce())
-                score = "Deuce";
 
-            if (IsInAdvantage())
-            {
-                score = $"Advantage {GetPlayerNameInAdvantage()}";
-            }
+            if (AreEquals()) score = GetScoreWord(player1Points) + "-All";
+            if (AreDeuce()) score = "Deuce";
+            if (IsInAdvantage()) score = $"Advantage {GetPlayerNameInAdvantage()}";
+            if (WeHaveWinner()) score = $"Win for {GetPlayerNameInAdvantage()}";
 
-            if (WeHaveWinner())
-            {
-                score = $"Win for {GetPlayerNameInAdvantage()}";
-            }
-            
             return score;
         }
 
@@ -77,7 +66,7 @@ namespace Tennis
 
         public void WonPoint(string player)
         {
-            if (player == "player1")
+            if (player == player1Name)
                 player1Points++;
             else
                 player2Points++;
