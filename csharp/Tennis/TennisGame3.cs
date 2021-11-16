@@ -17,6 +17,24 @@ namespace Tennis
             pointNames = new[] { "Love", "Fifteen", "Thirty", "Forty" };
         }
 
+        public void WonPoint(string playerName)
+        {
+            if (playerName == "player1")
+                player1Points += 1;
+            else
+                player2Points += 1;
+        }
+        private string GetScoreForTheSame()
+        {
+            var s = GetPointName(player1Points);
+            return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
+        }
+
+        private string GetPointName(int point)
+        {
+            return pointNames[point];
+        }
+
         public string GetScoreResult()
         {
             if (IsTheSame())
@@ -33,12 +51,6 @@ namespace Tennis
             return player1Points > player2Points ? player1Name : player2Name;
         }
 
-        private string GetScoreForTheSame()
-        {
-            var s = GetPointName(player1Points);
-            return (player1Points == player2Points) ? s + "-All" : s + "-" + pointNames[player2Points];
-        }
-
         private bool IsTheSame()
         {
             return (player1Points < 4 && player2Points < 4) && (player1Points + player2Points < 6);
@@ -48,20 +60,7 @@ namespace Tennis
         {
             return Math.Abs(player1Points - player2Points) == 1;
         }
-
-        private string GetPointName(int point)
-        {
-            return pointNames[point];
-        }
-
-        public void WonPoint(string playerName)
-        {
-            if (playerName == "player1")
-                player1Points += 1;
-            else
-                player2Points += 1;
-        }
-
+        
     }
 }
 
