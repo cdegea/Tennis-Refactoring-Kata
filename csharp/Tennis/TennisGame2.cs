@@ -2,44 +2,39 @@ namespace Tennis
 {
     public class TennisGame2 : ITennisGame
     {
-        private int p1point;
-        private int p2point;
-
-        private string p1res = "";
-        private string p2res = "";
+        private int player1Points;
+        private int player2Points;
 
         public TennisGame2()
         {
-            p1point = 0;
+            player1Points = 0;
         }
 
         public string GetScoreResult()
         {
-            var score = GetScoreWord(p1point) + "-" + GetScoreWord(p2point);
-            if (p1point == p2point && p1point < 3)
+            var score = GetScoreWord(player1Points) + "-" + GetScoreWord(player2Points);
+            if (player1Points == player2Points && player1Points < 3)
             {
-                score = GetScoreWord(p1point) + "-All";
+                score = GetScoreWord(player1Points) + "-All";
             }
-            if (p1point == p2point && p1point > 2)
+            if (player1Points == player2Points && player1Points > 2)
                 score = "Deuce";
 
-            
-
-            if (p1point > p2point && p2point >= 3)
+            if (player1Points > player2Points && player2Points >= 3)
             {
                 score = "Advantage player1";
             }
 
-            if (p2point > p1point && p1point >= 3)
+            if (player2Points > player1Points && player1Points >= 3)
             {
                 score = "Advantage player2";
             }
 
-            if (p1point >= 4 && p2point >= 0 && (p1point - p2point) >= 2)
+            if (player1Points >= 4 && player2Points >= 0 && (player1Points - player2Points) >= 2)
             {
                 score = "Win for player1";
             }
-            if (p2point >= 4 && p1point >= 0 && (p2point - p1point) >= 2)
+            if (player2Points >= 4 && player1Points >= 0 && (player2Points - player1Points) >= 2)
             {
                 score = "Win for player2";
             }
@@ -63,7 +58,7 @@ namespace Tennis
 
         private string GetScoreForSame(string score)
         {
-            switch (p1point)
+            switch (player1Points)
             {
                 case 0:
                     score = "Love";
@@ -83,9 +78,9 @@ namespace Tennis
         public void WonPoint(string player)
         {
             if (player == "player1")
-                p1point++;
+                player1Points++;
             else
-                p2point++;
+                player2Points++;
         }
     }
 }
